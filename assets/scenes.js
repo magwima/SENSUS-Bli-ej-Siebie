@@ -3,15 +3,19 @@
 (function () {
   'use strict';
 
+  var V = 'assets/scenes/';
   var LIST = [
     { id: 'deszcz', name: 'Deszcz', icon: '<path d="M7 14.5a4 4 0 01-.6-7.9 5 5 0 019.7 1.3A3.4 3.4 0 0116.8 14.5"/><path d="M9 17.5l-.9 2M12.4 17.5l-.9 2M15.8 17.5l-.9 2"/>' },
-    { id: 'burza', name: 'Burza', icon: '<path d="M7 13.5a4 4 0 01-.6-7.9 5 5 0 019.7 1.3A3.4 3.4 0 0116.8 13.5"/><path d="M12.6 11.5l-2.1 4h3l-2.1 4"/>' },
-    { id: 'rzeka', name: 'Rzeka', icon: '<path d="M3.5 8c2.8 0 2.8-2 5.7-2s2.8 2 5.6 2 2.9-2 5.7-2M3.5 12.5c2.8 0 2.8-2 5.7-2s2.8 2 5.6 2 2.9-2 5.7-2M3.5 17c2.8 0 2.8-2 5.7-2s2.8 2 5.6 2 2.9-2 5.7-2"/>' },
+    { id: 'burza', name: 'Burza', v: ['burza-1'], icon: '<path d="M7 13.5a4 4 0 01-.6-7.9 5 5 0 019.7 1.3A3.4 3.4 0 0116.8 13.5"/><path d="M12.6 11.5l-2.1 4h3l-2.1 4"/>' },
+    { id: 'morze', name: 'Morze', v: ['morze-1', 'morze-2'], icon: '<path d="M3 14.5c2.2 0 3.2-5 7-5 2.8 0 3.6 2.6 1.8 3.8"/><path d="M3 18.5c2.5 0 3-1.5 5.5-1.5s3 1.5 5.5 1.5 3-1.5 5.5-1.5"/><path d="M14.5 10.5c1.6-2.2 3.8-3.2 6.5-3.2"/>' },
+    { id: 'jezioro', name: 'Jezioro', v: ['jezioro-1'], icon: '<circle cx="12" cy="7.5" r="2.6"/><path d="M3.5 14c2 0 2-1.4 4.2-1.4S10 14 12 14s2.2-1.4 4.3-1.4S18.5 14 20.5 14M6 18c1.5 0 1.5-1 3-1s1.5 1 3 1 1.5-1 3-1 1.5 1 3 1"/>' },
+    { id: 'rzeka', name: 'Rzeka', v: ['rzeka-1'], icon: '<path d="M3.5 8c2.8 0 2.8-2 5.7-2s2.8 2 5.6 2 2.9-2 5.7-2M3.5 12.5c2.8 0 2.8-2 5.7-2s2.8 2 5.6 2 2.9-2 5.7-2M3.5 17c2.8 0 2.8-2 5.7-2s2.8 2 5.6 2 2.9-2 5.7-2"/>' },
     { id: 'strumien', name: 'Strumień', icon: '<path d="M12 4c3 4.4 5 7.4 5 9.9a5 5 0 01-10 0C7 11.4 9 8.4 12 4z"/>' },
-    { id: 'ptaki', name: 'Ptaki w lesie', icon: '<path d="M3.5 10c1.4-1.5 2.9-1.5 4 0 1.1-1.5 2.6-1.5 4 0M12.5 15c1.4-1.5 2.9-1.5 4 0 1.1-1.5 2.6-1.5 4 0"/>' },
-    { id: 'ogien', name: 'Ognisko', icon: '<path d="M12 3.5c1 3.4 5 5.4 5 9.8a5 5 0 01-10 0c0-2.4 1.4-3.9 2.4-4.9.3 1.5 1 2.5 2 2.9 0-2.9-.3-5.3.6-7.8z"/>' },
-    { id: 'swierszcze', name: 'Noc i świerszcze', icon: '<path d="M12 19.5c0-5.6-2.9-8.6-6.6-9.5 0 4.7 2.8 8.6 6.6 9.5zM12 19.5c0-5.6 2.9-8.6 6.6-9.5 0 4.7-2.8 8.6-6.6 9.5z"/><path d="M12 19.5V8"/>' },
-    { id: 'jezioro', name: 'Jezioro', icon: '<circle cx="12" cy="7.5" r="2.6"/><path d="M3.5 14c2 0 2-1.4 4.2-1.4S10 14 12 14s2.2-1.4 4.3-1.4S18.5 14 20.5 14M6 18c1.5 0 1.5-1 3-1s1.5 1 3 1 1.5-1 3-1 1.5 1 3 1"/>' }
+    { id: 'mgla', name: 'Mglisty las', v: ['mgla-1'], icon: '<path d="M4 8.5h10M17 8.5h3M6 12.5h14M4 16.5h8M15 16.5h3"/>' },
+    { id: 'ptaki', name: 'Ptaki w lesie', v: ['las-1', 'las-2'], icon: '<path d="M3.5 10c1.4-1.5 2.9-1.5 4 0 1.1-1.5 2.6-1.5 4 0M12.5 15c1.4-1.5 2.9-1.5 4 0 1.1-1.5 2.6-1.5 4 0"/>' },
+    { id: 'liscie', name: 'Jesienne liście', v: ['liscie-1', 'liscie-2'], icon: '<path d="M6 18.5c0-7.2 5-12 13-12-.5 8-5.6 12-13 12z"/><path d="M6 18.5l7.2-7.2"/>' },
+    { id: 'ogien', name: 'Ognisko', v: ['ognisko-1', 'ognisko-2'], icon: '<path d="M12 3.5c1 3.4 5 5.4 5 9.8a5 5 0 01-10 0c0-2.4 1.4-3.9 2.4-4.9.3 1.5 1 2.5 2 2.9 0-2.9-.3-5.3.6-7.8z"/>' },
+    { id: 'swierszcze', name: 'Noc i świerszcze', v: ['noc-1'], icon: '<path d="M12 19.5c0-5.6-2.9-8.6-6.6-9.5 0 4.7 2.8 8.6 6.6 9.5zM12 19.5c0-5.6 2.9-8.6 6.6-9.5 0 4.7-2.8 8.6-6.6 9.5z"/><path d="M12 19.5V8"/>' }
   ];
   function icon(id) {
     var s = LIST.filter(function (x) { return x.id === id; })[0];
@@ -19,6 +23,7 @@
   }
 
   /* ---------------- visuals ---------------- */
+  var vwrap = null, vids = [], vi = 0, useCanvas = true;
   var cv = null, ctx = null, raf = 0, cur = null, W = 0, H = 0, last = 0, t0 = 0, reduce = false, S = {}, activeSound = null;
   function R(a, b) { return a + Math.random() * (b - a); }
   function size() {
@@ -30,16 +35,40 @@
     init();
   }
   function init() { S = {}; if (D[cur] && D[cur].init) D[cur].init(); }
+  function find(id) { return LIST.filter(function (x) { return x.id === id; })[0]; }
+  function mkVid() {
+    var v = document.createElement('video'); v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true'); v.preload = 'auto'; return v;
+  }
+  function canvasOn(on) { useCanvas = on; if (cv) cv.style.opacity = on ? '1' : '0'; }
+  function showVideo(id) {
+    var sc = find(id);
+    if (!vwrap || !sc || !sc.v) { vids.forEach(function (v) { v.classList.remove('on'); }); canvasOn(true); return; }
+    var base = V + sc.v[Math.floor(Math.random() * sc.v.length)], nv = vids[vi ^= 1], ov = vids[vi ^ 1];
+    nv.onerror = function () { if (vids[vi] === nv) { nv.classList.remove('on'); canvasOn(true); } };
+    nv.poster = base + '.jpg';
+    if (reduce) { nv.removeAttribute('src'); nv.load(); }
+    else { nv.src = base + '.mp4'; nv.load(); var p = nv.play(); if (p && p.catch) p.catch(function () { }); }
+    nv.classList.add('on'); ov.classList.remove('on'); canvasOn(false);
+    setTimeout(function () { if (vids[vi] !== ov) { ov.pause(); ov.removeAttribute('src'); ov.load(); } }, 1400);
+  }
   function start(canvas, id, o) {
     stop(); cv = canvas; ctx = cv.getContext('2d'); cur = D[id] ? id : 'jezioro'; reduce = !!(o && o.reduce);
+    vwrap = (o && o.video) || null;
+    if (vwrap && !vids.length) { vids = [mkVid(), mkVid()]; vids.forEach(function (v) { vwrap.appendChild(v); }); }
     addEventListener('resize', size); size(); t0 = last = performance.now(); raf = requestAnimationFrame(loop);
+    showVideo(cur);
   }
-  function set(id) { if (!D[id] || id === cur) return; cur = id; init(); }
-  function stop() { cancelAnimationFrame(raf); raf = 0; removeEventListener('resize', size); cv = null; }
+  function set(id) { if (!D[id] || id === cur) return; cur = id; init(); showVideo(id); }
+  function stop() {
+    cancelAnimationFrame(raf); raf = 0; removeEventListener('resize', size); cv = null;
+    vids.forEach(function (v) { v.classList.remove('on'); v.pause(); v.removeAttribute('src'); v.load(); });
+  }
   function loop(now) {
     raf = requestAnimationFrame(loop);
     var dt = (now - last) / 1000; if (dt < 1 / 31) return; last = now; dt = Math.min(dt, .1);
     var t = (now - t0) / 1000; if (reduce) { dt *= .35; t *= .35; }
+    if (!useCanvas) return;
     try { D[cur].draw(t, dt); } catch (e) { }
   }
   function grad(c1, c2) { var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, c1); g.addColorStop(1, c2); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
@@ -193,6 +222,18 @@
       }
     }
   };
+  D.morze = D.jezioro; D.liscie = D.ptaki;
+  D.mgla = {
+    init: function () {
+      S.t = []; for (var i = 0; i < 16; i++) S.t.push({ x: R(-.05, 1.05) * W, w: R(6, 26), a: R(.25, .7) });
+      S.f = []; for (var j = 0; j < 9; j++) S.f.push({ x: R(0, W), y: R(.2, .9) * H, r: R(.3, .6) * W, v: R(4, 12) });
+    },
+    draw: function (t, dt) {
+      grad('#7b857a', '#2f372f');
+      S.t.forEach(function (k) { ctx.fillStyle = 'rgba(28,34,27,' + k.a + ')'; ctx.fillRect(k.x, 0, k.w, H); });
+      S.f.forEach(function (f) { f.x += f.v * dt; if (f.x - f.r > W) f.x = -f.r; glow(f.x, f.y, f.r, '226,228,220', .22); });
+    }
+  };
   function rz() { return { x: R(-10, W + 10), y: R(-10, H), s: R(.6, 2.2), a: R(.07, .24), l: R(3, 9), g: Math.random() < .08 }; }
   function st() { return { x: R(W * .1, W * 1.2), y: R(-30, H * .4), s: R(.6, 2), a: R(.08, .26), l: R(3, 8), g: Math.random() < .06 }; }
 
@@ -238,18 +279,33 @@
       bed('brown', [F('lowpass', 900)], .22);
       var bub = bed('white', [F('bandpass', 2300, 1)], .05); lfo(3.1, .02, bub.gain); lfo(4.7, .015, bub.gain); lfo(.4, .01, bub.gain);
     }
-    if (id === 'ptaki') {
-      var bp = F('bandpass', 3200, .6), leaves = bed('white', [F('highpass', 1200), bp], .04); lfo(.13, .03, leaves.gain); lfo(.05, 900, bp.frequency);
+    function leavesBed(g) { var bp = F('bandpass', 3200, .6), lv = bed('white', [F('highpass', 1200), bp], g); lfo(.13, g * .75, lv.gain); lfo(.05, 900, bp.frequency); }
+    function birds(vol, minMs, maxMs) {
       (function bird() {
         var n = Math.floor(R(2, 6)), t = ac.currentTime + .05, base = R(2400, 4200), dest = panTo(R(-.8, .8));
         for (var i = 0; i < n; i++) {
           var o = ac.createOscillator(), g = ac.createGain(), f0 = base * R(.9, 1.15);
           o.type = 'sine'; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f0 * R(.7, 1.4), t + R(.06, .14));
-          g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(R(.012, .03), t + .015); g.gain.exponentialRampToValueAtTime(.0001, t + .17);
+          g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(R(.012, .03) * vol, t + .015); g.gain.exponentialRampToValueAtTime(.0001, t + .17);
           o.connect(g); g.connect(dest); o.start(t); o.stop(t + .2); t += R(.12, .26);
         }
-        later(bird, R(1300, 4800));
+        later(bird, R(minMs, maxMs));
       })();
+    }
+    if (id === 'morze') {
+      var sw = bed('brown', [F('lowpass', 650)], .32); lfo(.08, .26, sw.gain);
+      var hiss = bed('white', [F('bandpass', 1600, .5)], .03); lfo(.08, .026, hiss.gain);
+    }
+    if (id === 'mgla') {
+      var wd = bed('brown', [F('bandpass', 320, .7)], .12); lfo(.06, .06, wd.gain);
+      birds(.6, 5000, 12000);
+    }
+    if (id === 'liscie') {
+      leavesBed(.06); var wl = bed('brown', [F('bandpass', 450, .8)], .1); lfo(.09, .06, wl.gain);
+    }
+    if (id === 'ptaki') {
+      leavesBed(.04);
+      birds(1, 1300, 4800);
     }
     if (id === 'ogien') {
       var roar = bed('brown', [F('lowpass', 480)], .32); lfo(.6, .08, roar.gain); lfo(1.7, .05, roar.gain);

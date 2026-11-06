@@ -16,7 +16,8 @@ Strona: https://odnajdzspokoj.com (Cloudflare Pages, wdrażana automatycznie z g
 
 - `index.html` – cała strona
 - `assets/` – logo i ikony
-- `assets/scenes.js` – sceny natury (animacje i dźwięki). Docelowo każdą scenę można zastąpić prawdziwym filmem SENSUS.
+- `assets/scenes.js` – sceny natury (filmy, animacje zapasowe i dźwięki)
+- `assets/scenes/` – zapętlone filmy scen (720p, bez dźwięku) i ich kadry startowe
 - `manifest.webmanifest` – pozwala dodać stronę do ekranu głównego telefonu
 
 Ćwiczenia są zapisane jako dane (`TECH` i `TOOLS` w `index.html`), więc nową technikę dodaje się jednym wpisem.

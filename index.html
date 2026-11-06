@@ -269,15 +269,19 @@ input[type=range]{width:100%;accent-color:var(--olive)}
 [data-focus]:focus{outline:none}
 /* nature scenes */
 .scene-cv{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;transition:opacity 3s ease}
-.scene-shade{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 42%,rgba(8,10,7,.08),rgba(8,10,7,.5))}
+.scene-vid{position:fixed;inset:0;z-index:0;overflow:hidden;background:#12160f}
+.scene-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+.scene-vid video.on{opacity:1}
+.scene-shade{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 42%,rgba(8,10,7,.24),rgba(8,10,7,.6))}
 .sheet .pl{position:relative;z-index:1}
 .sheet.immersive{background:#12160f;--bg:#12160f;--surface:rgba(246,240,225,.08);--fg:#F6F0E1;--muted:rgba(246,240,225,.8);--olive:#F1CD84;--line:rgba(246,240,225,.3);--soft:rgba(246,240,225,.16);--accent:#F1CD84;--accent-ink:#22301F;--gold-deep:#F1CD84;--warn-bg:rgba(246,240,225,.12);color:var(--fg);color-scheme:dark;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 .sheet.immersive .x,.sheet.immersive .btn.ghost{background:rgba(18,22,15,.28);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-shadow:none}
 .sheet.immersive .btn{text-shadow:none}
 .sheet.immersive .orb{background:radial-gradient(circle at 40% 35%,rgba(246,240,225,.45),rgba(246,240,225,.08) 72%);box-shadow:inset 0 0 0 1px rgba(246,240,225,.38)}
 .sheet.dim .scene-cv{opacity:.3}
-.pill{display:flex;justify-content:space-between;gap:2px;padding:6px;border-radius:99px;background:rgba(246,240,225,.14);border:1px solid rgba(246,240,225,.32);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);width:100%;max-width:430px;margin:0 auto;box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
-.pill button{flex:1 1 0;min-width:0;max-width:46px;aspect-ratio:1;border-radius:50%;border:1px solid transparent;background:none;color:#F6F0E1;display:grid;place-items:center;padding:0;opacity:.78;transition:background .3s,border-color .3s,box-shadow .3s,opacity .3s}
+.pill{display:flex;gap:4px;padding:6px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;border-radius:99px;background:rgba(246,240,225,.14);border:1px solid rgba(246,240,225,.32);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);width:100%;max-width:430px;margin:0 auto;box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+.pill::-webkit-scrollbar{display:none}
+.pill button{flex:0 0 44px;height:44px;scroll-snap-align:center;border-radius:50%;border:1px solid transparent;background:none;color:#F6F0E1;display:grid;place-items:center;padding:0;opacity:.78;transition:background .3s,border-color .3s,box-shadow .3s,opacity .3s}
 .pill button svg{width:58%;height:58%}
 .pill button:hover{opacity:1}
 .pill button[aria-checked="true"]{opacity:1;border-color:rgba(241,205,132,.9);background:rgba(241,205,132,.18);box-shadow:0 0 16px rgba(241,205,132,.45)}
@@ -470,7 +474,7 @@ input[type=range]{width:100%;accent-color:var(--olive)}
 </nav></div>
 
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="Ćwiczenie">
-  <canvas class="scene-cv" id="sceneCv" hidden aria-hidden="true"></canvas><div class="scene-shade" id="sceneShade" hidden></div>
+  <canvas class="scene-cv" id="sceneCv" hidden aria-hidden="true"></canvas><div class="scene-vid" id="sceneVid" hidden aria-hidden="true"></div><div class="scene-shade" id="sceneShade" hidden></div>
   <div class="pl">
     <div class="pl-top"><span class="eyebrow" id="shEy"></span><button class="x" id="shClose" type="button">Zamknij</button></div>
     <div id="shBody"></div>
@@ -590,9 +594,9 @@ var SIGNALS=[
  {id:'przetrwanie',h:'Tryb przetrwania',b:'Poczucie, że musisz „jeszcze tylko trochę wytrzymać”, odkładając siebie na wieczne później.',sug:['t:krok','b:pudelkowy','w:wsparcie']}
 ];
 function find(arr,id){for(var i=0;i<arr.length;i++)if(arr[i].id===id)return arr[i]}
-var DEF_SCENE={westchnienie:'ptaki',wydech:'jezioro',rozmowa:'strumien',pudelkowy:'rzeka','478':'swierszcze'};
+var DEF_SCENE={westchnienie:'ptaki',wydech:'morze',rozmowa:'jezioro',pudelkowy:'mgla','478':'swierszcze'};
 var MEDS=[
- {id:'wieczor',name:'Wieczorne wyciszenie',sub:'zamiast scrollować przed snem',rh:'~3 min',scene:'jezioro',lines:[
+ {id:'wieczor',name:'Wieczorne wyciszenie',sub:'zamiast scrollować przed snem',rh:'~3 min',scene:'swierszcze',lines:[
   [7,'Odłóż na chwilę wszystko, co jeszcze zostało z dnia.'],[8,'Połóż się wygodnie. Nie musisz teraz nic robić.'],[7,'Jeśli chcesz, zamknij oczy.'],
   [9,'Zauważ, jak ciało dotyka podłoża. Pozwól mu stać się ciężkim.'],[6,'Weź spokojny wdech nosem…'],[8,'…i powoli wypuść powietrze ustami.'],
   [6,'Jeszcze raz. Wdech…'],[8,'…i długi, miękki wydech.'],[9,'Rozluźnij czoło. Brwi. Okolice oczu.'],[9,'Puść szczękę. Niech język spocznie swobodnie.'],
@@ -723,15 +727,16 @@ function wakeOff(){if(wake){try{wake.release()}catch(e){}wake=null}}
 
 /* sheet */
 var cleanup=null,pickScene=null,cvOn=false;
-function immersive(sc){if(!sc||sc==='brak'||!window.SensusScenes){exitImm();return}var sh=$('sheet');sh.classList.add('immersive');sh.classList.remove('dim');$('sceneCv').hidden=false;$('sceneShade').hidden=false;
-  if(cvOn)SensusScenes.set(sc);else{SensusScenes.start($('sceneCv'),sc,{reduce:RM()});cvOn=true}}
-function exitImm(){if(cvOn){SensusScenes.stop();cvOn=false}var sh=$('sheet');sh.classList.remove('immersive');sh.classList.remove('dim');$('sceneCv').hidden=true;$('sceneShade').hidden=true}
+function immersive(sc){if(!sc||sc==='brak'||!window.SensusScenes){exitImm();return}var sh=$('sheet');sh.classList.add('immersive');sh.classList.remove('dim');$('sceneCv').hidden=false;$('sceneVid').hidden=false;$('sceneShade').hidden=false;
+  if(cvOn)SensusScenes.set(sc);else{SensusScenes.start($('sceneCv'),sc,{reduce:RM(),video:$('sceneVid')});cvOn=true}}
+function exitImm(){if(cvOn){SensusScenes.stop();cvOn=false}var sh=$('sheet');sh.classList.remove('immersive');sh.classList.remove('dim');$('sceneCv').hidden=true;$('sceneVid').hidden=true;$('sceneShade').hidden=true}
 function pillHtml(cur){if(!window.SensusScenes)return '';
   return '<div><div class="pill" role="radiogroup" aria-label="Scena i dźwięki natury">'+SensusScenes.list.map(function(x){return '<button type="button" role="radio" aria-checked="'+(x.id===cur)+'" data-scene="'+x.id+'" aria-label="'+x.name+'" title="'+x.name+'">'+SensusScenes.icon(x.id)+'</button>'}).join('')+'</div>'+
    '<div class="pill-name"><span id="pillName">'+sceneName(cur)+'</span><svg viewBox="0 0 130 10" aria-hidden="true"><path d="M2 6c20 0 24-4 44-4s24 6 44 6 22-4 38-4"/></svg></div></div>'}
-function updatePill(v){document.querySelectorAll('#shBody [data-scene]').forEach(function(b){b.setAttribute('aria-checked',b.dataset.scene===v)});var n=$('pillName');if(n)n.textContent=sceneName(v)}
+function updatePill(v){document.querySelectorAll('#shBody [data-scene]').forEach(function(b){b.setAttribute('aria-checked',b.dataset.scene===v)});var n=$('pillName');if(n)n.textContent=sceneName(v);centerPill()}
+function centerPill(){var b=document.querySelector('#shBody .pill [aria-checked="true"]');if(b&&b.parentNode){var p=b.parentNode;p.scrollLeft=b.offsetLeft-p.clientWidth/2+b.clientWidth/2}}
 var lastFocus=null;
-function focusIn(){var h=$('shBody').querySelector('h2');$('sheet').setAttribute('aria-label',h?h.textContent:$('shEy').textContent);var f=$('shBody').querySelector('[data-focus]');(f||$('shClose')).focus({preventScroll:true})}
+function focusIn(){var h=$('shBody').querySelector('h2');$('sheet').setAttribute('aria-label',h?h.textContent:$('shEy').textContent);var f=$('shBody').querySelector('[data-focus]');(f||$('shClose')).focus({preventScroll:true});centerPill()}
 function openSheet(ey,html){if(cleanup){cleanup();cleanup=null}exitImm();pickScene=null;if($('sheet').hidden)lastFocus=document.activeElement;$('shEy').textContent=ey;$('shBody').innerHTML=html;$('sheet').hidden=false;document.body.style.overflow='hidden';$('sheet').scrollTop=0;focusIn()}
 function setBody(html){if(cleanup){cleanup();cleanup=null}$('shBody').innerHTML=html;$('sheet').scrollTop=0;focusIn()}
 function closeSheet(){if(cleanup){cleanup();cleanup=null}stopBg();exitImm();pickScene=null;wakeOff();$('sheet').hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.isConnected&&!lastFocus.closest('#sheet'))try{lastFocus.focus({preventScroll:true})}catch(e){}}
