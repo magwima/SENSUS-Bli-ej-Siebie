@@ -1,7 +1,7 @@
 # SENSUS – Bliżej Siebie
 
 Strona z ćwiczeniami oddechowymi i narzędziami do pracy ze sobą dla SENSUS.
-Statyczna strona (HTML, CSS, JS w jednym pliku), działa na GitHub Pages bez budowania.
+Strona: https://odnajdzspokoj.com (Cloudflare Pages, wdrażana automatycznie z gałęzi `main`). Statyczna strona bez etapu budowania.
 
 ## Co jest w środku
 
