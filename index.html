@@ -258,6 +258,35 @@ input[type=range]{width:100%;accent-color:var(--olive)}
 .iconbtn{background:none;border:1px solid var(--line);border-radius:99px;width:40px;height:40px;display:grid;place-items:center;color:var(--fg);padding:0}
 .iconbtn svg{width:20px;height:20px}
 [data-focus]:focus{outline:none}
+/* nature scenes */
+.scene-cv{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;transition:opacity 3s ease}
+.scene-shade{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 42%,rgba(8,10,7,.08),rgba(8,10,7,.5))}
+.sheet .pl{position:relative;z-index:1}
+.sheet.immersive{background:#12160f;--bg:#12160f;--surface:rgba(246,240,225,.08);--fg:#F6F0E1;--muted:rgba(246,240,225,.8);--olive:#F1CD84;--line:rgba(246,240,225,.3);--soft:rgba(246,240,225,.16);--accent:#F1CD84;--accent-ink:#22301F;--gold-deep:#F1CD84;--warn-bg:rgba(246,240,225,.12);color:var(--fg);color-scheme:dark;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+.sheet.immersive .x,.sheet.immersive .btn.ghost{background:rgba(18,22,15,.28);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-shadow:none}
+.sheet.immersive .btn{text-shadow:none}
+.sheet.immersive .orb{background:radial-gradient(circle at 40% 35%,rgba(246,240,225,.45),rgba(246,240,225,.08) 72%);box-shadow:inset 0 0 0 1px rgba(246,240,225,.38)}
+.sheet.dim .scene-cv{opacity:.3}
+.pill{display:flex;justify-content:space-between;gap:2px;padding:6px;border-radius:99px;background:rgba(246,240,225,.14);border:1px solid rgba(246,240,225,.32);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);width:100%;max-width:430px;margin:0 auto;box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+.pill button{flex:1 1 0;min-width:0;max-width:46px;aspect-ratio:1;border-radius:50%;border:1px solid transparent;background:none;color:#F6F0E1;display:grid;place-items:center;padding:0;opacity:.78;transition:background .3s,border-color .3s,box-shadow .3s,opacity .3s}
+.pill button svg{width:58%;height:58%}
+.pill button:hover{opacity:1}
+.pill button[aria-checked="true"]{opacity:1;border-color:rgba(241,205,132,.9);background:rgba(241,205,132,.18);box-shadow:0 0 16px rgba(241,205,132,.45)}
+.pill-name{display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:10px}
+.pill-name span{background:rgba(18,22,15,.4);border-radius:99px;padding:4px 18px;font-size:15px;letter-spacing:.04em;color:#F6F0E1}
+.pill-name svg{width:130px;height:10px;fill:none;stroke:#F1CD84;stroke-width:1.4;stroke-linecap:round}
+.pill-lbl{text-align:center;font-size:15px;color:var(--muted)}
+.seg button svg{width:17px;height:17px;vertical-align:-4px;margin-right:6px}
+.med-top{text-align:center;display:flex;flex-direction:column;gap:6px;padding-top:6px}
+.med-run{flex:1;display:flex;flex-direction:column;gap:16px;min-height:72vh}
+.cap{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--font-display);font-size:32px;line-height:1.25;font-weight:500;max-width:20ch;margin:0 auto;transition:opacity 1s ease;min-height:5em}
+.cap.fade{opacity:0}
+.cap.off{visibility:hidden}
+.med-ctrl{display:flex;flex-direction:column;gap:10px;align-items:center}
+.door.night{background:radial-gradient(1px 1px at 20% 30%,rgba(246,240,225,.8),transparent),radial-gradient(1px 1px at 70% 20%,rgba(246,240,225,.6),transparent),radial-gradient(1.5px 1.5px at 85% 60%,rgba(241,205,132,.8),transparent),radial-gradient(1px 1px at 45% 75%,rgba(246,240,225,.5),transparent),linear-gradient(135deg,#17222a,#22301f 55%,#2E402A);color:#F6F0E1}
+.door.night small{color:rgba(246,240,225,.78)}
+.door.night .pv{display:flex;gap:6px;margin-top:8px;color:rgba(246,240,225,.85)}
+.door.night .pv svg{width:20px;height:20px}
 .remind{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:14px}
 .remind input[type=time]{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-variant-numeric:tabular-nums}
 </style>
@@ -298,10 +327,15 @@ input[type=range]{width:100%;accent-color:var(--olive)}
       <div class="card" id="chMini"></div>
     </section>
 
+    <a class="door night" href="#medytacje">
+      <span><strong>Wieczorne wyciszenie</strong><small>Zamiast scrollować przed snem: medytacja z dźwiękami natury do wyboru.</small><span class="pv" id="pvIcons" aria-hidden="true"></span></span>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+
     <section class="sec">
       <p class="eyebrow">Wkrótce w SENSUS</p>
       <div class="soon">
-        <div><strong>Medytacje i relaksacje</strong><span>Z wyborem tła: deszcz, wiatr, woda, ptaki, szum liści</span></div>
+        <div><strong>Głos SENSUS</strong><span>Medytacje prowadzone głosem</span></div>
         <div><strong>Afirmacje</strong><span>Krótkie teksty do czytania i słuchania</span></div>
       </div>
     </section>
@@ -324,6 +358,16 @@ input[type=range]{width:100%;accent-color:var(--olive)}
   </main>
 
   <!-- ODDECH -->
+  <main id="v-medytacje" class="view" hidden>
+    <section class="sec">
+      <p class="eyebrow">Medytacje i relaksacje</p>
+      <h2>Wycisz się przed snem</h2>
+      <p class="lead">Wybierz scenę z dźwiękami natury i po prostu słuchaj. Napisy możesz włączyć lub wyłączyć, a dźwięk sam łagodnie ucichnie o wybranej porze.</p>
+      <div class="list" id="medList"></div>
+    </section>
+    <p class="note">Nagrania głosu SENSUS pojawią się wkrótce. Na razie medytację prowadzą napisy.</p>
+  </main>
+
   <main id="v-oddech" class="view" hidden>
     <section class="sec">
       <p class="eyebrow">Techniki oddechowe</p>
@@ -417,6 +461,7 @@ input[type=range]{width:100%;accent-color:var(--olive)}
 </nav></div>
 
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="Ćwiczenie">
+  <canvas class="scene-cv" id="sceneCv" hidden aria-hidden="true"></canvas><div class="scene-shade" id="sceneShade" hidden></div>
   <div class="pl">
     <div class="pl-top"><span class="eyebrow" id="shEy"></span><button class="x" id="shClose" type="button">Zamknij</button></div>
     <div id="shBody"></div>
@@ -424,6 +469,7 @@ input[type=range]{width:100%;accent-color:var(--olive)}
   </div>
 </div>
 
+<script src="assets/scenes.js"></script>
 <script>
 (function(){
 'use strict';
@@ -431,7 +477,7 @@ var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function load(k,d){try{var v=localStorage.getItem('sensus.'+k);return v?JSON.parse(v):d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem('sensus.'+k,JSON.stringify(v))}catch(e){}}
-var prefs=Object.assign({sound:'brak',vol:.5,chime:true,counter:true,vibrate:true,text:'m',motion:'auto',remindAt:'20:00'},load('prefs',{}));
+var prefs=Object.assign({scenes:{},medScenes:{},captions:true,sleepMin:20,vol:.5,chime:true,counter:true,vibrate:true,text:'m',motion:'auto',remindAt:'20:00'},load('prefs',{}));
 var CAN_VIB=typeof navigator.vibrate==='function';
 function applyPrefs(){var r=document.documentElement;r.dataset.text=prefs.text||'m';r.dataset.motion=prefs.motion==='reduce'?'reduce':'auto'}
 applyPrefs();
@@ -535,13 +581,30 @@ var SIGNALS=[
  {id:'przetrwanie',h:'Tryb przetrwania',b:'Poczucie, że musisz „jeszcze tylko trochę wytrzymać”, odkładając siebie na wieczne później.',sug:['t:krok','b:pudelkowy','w:wsparcie']}
 ];
 function find(arr,id){for(var i=0;i<arr.length;i++)if(arr[i].id===id)return arr[i]}
-function ref(o){var p=o.split(':');if(p[0]==='b')return {kind:'b',x:find(TECH,p[1])};if(p[0]==='t')return {kind:'t',x:find(TOOLS,p[1])};return {kind:'w'}}
+var DEF_SCENE={westchnienie:'ptaki',wydech:'jezioro',rozmowa:'strumien',pudelkowy:'rzeka','478':'swierszcze'};
+var MEDS=[
+ {id:'wieczor',name:'Wieczorne wyciszenie',sub:'zamiast scrollować przed snem',rh:'~3 min',scene:'jezioro',lines:[
+  [7,'Odłóż na chwilę wszystko, co jeszcze zostało z dnia.'],[8,'Połóż się wygodnie. Nie musisz teraz nic robić.'],[7,'Jeśli chcesz, zamknij oczy.'],
+  [9,'Zauważ, jak ciało dotyka podłoża. Pozwól mu stać się ciężkim.'],[6,'Weź spokojny wdech nosem…'],[8,'…i powoli wypuść powietrze ustami.'],
+  [6,'Jeszcze raz. Wdech…'],[8,'…i długi, miękki wydech.'],[9,'Rozluźnij czoło. Brwi. Okolice oczu.'],[9,'Puść szczękę. Niech język spocznie swobodnie.'],
+  [9,'Ramiona opadają. Dłonie stają się ciężkie i ciepłe.'],[10,'Z każdym wydechem ciało zapada się odrobinę głębiej.'],
+  [10,'Myśli mogą przychodzić. Nie zatrzymuj ich i nie odpychaj.'],[10,'Pozwól im odpływać jak liściom na wodzie.'],
+  [10,'Wsłuchaj się w dźwięki wokół. Nie musisz ich nazywać.'],[10,'Brzuch unosi się i opada. Oddech płynie sam.'],
+  [10,'Na dziś wystarczy. Wszystko inne może poczekać do jutra.'],[10,'Tu i teraz możesz po prostu odpocząć.'],
+  [10,'Pozwól sobie zasnąć, kiedy przyjdzie na to pora.'],[9,'Dobranoc.']]},
+ {id:'natura',name:'Tylko dźwięki natury',sub:'bez słów, do zaśnięcia lub wyciszenia',rh:'',scene:'deszcz',lines:[]}
+];
+function sceneFor(t){var v=prefs.scenes&&prefs.scenes[t.id];return v||DEF_SCENE[t.id]||'brak'}
+function sceneName(id){var x=(window.SensusScenes?SensusScenes.list:[]).filter(function(s){return s.id===id})[0];return x?x.name:''}
+function ref(o){var p=o.split(':');if(p[0]==='m')return {kind:'m',x:find(MEDS,p[1])};if(p[0]==='b')return {kind:'b',x:find(TECH,p[1])};if(p[0]==='t')return {kind:'t',x:find(TOOLS,p[1])};return {kind:'w'}}
 
 /* lists */
 function itemHtml(o,extra){
   var r=ref(o);if(r.kind==='w')return '<a class="item" href="#wsparcie" style="text-decoration:none"><h3>Wsparcie SENSUS</h3><span class="rh">'+ICON.arrow+'</span><span class="sub">gdy samodzielnie jest za trudno</span></a>';
   var x=r.x;return '<button class="item" data-open="'+o+'"><h3>'+esc(x.name)+'</h3><span class="rh num">'+(x.rh||'')+'</span><span class="sub">'+esc(x.sub)+'</span>'+(extra||'')+'</button>';
 }
+$('medList').innerHTML=MEDS.map(function(m){return itemHtml('m:'+m.id,'<p>'+(m.lines.length?'Napisy prowadzą krok po kroku. Scena i dźwięki do wyboru.':'Sama natura i wyłącznik czasowy.')+'</p>')}).join('');
+if(window.SensusScenes)$('pvIcons').innerHTML=SensusScenes.list.map(function(s){return SensusScenes.icon(s.id)}).join('');
 $('techList').innerHTML=TECH.map(function(t){return itemHtml('b:'+t.id,'<p>'+esc(t.when[0])+'</p>')}).join('')+
   '<div class="item" style="cursor:default"><h3>Oddech koherencji</h3><span class="sub">technika z Twoich rolek</span><span class="pending">Czeka na opis rytmu</span></div>';
 $('toolList').innerHTML=TOOLS.map(function(t){return itemHtml('t:'+t.id,'<p>'+esc(t.intro.split('. ')[0].replace(/\.$/,''))+'.</p>')}).join('');
@@ -559,11 +622,11 @@ function renderSignals(){
 renderSignals();
 
 /* routing */
-var VIEWS=['start','za-duzo','oddech','narzedzia','wyzwanie','wsparcie'];
+var VIEWS=['start','za-duzo','medytacje','oddech','narzedzia','wyzwanie','wsparcie'];
 function route(){
   var h=location.hash.replace('#','');if(VIEWS.indexOf(h)<0)h='start';
   VIEWS.forEach(function(v){$('v-'+v).hidden=v!==h});
-  var tab=h==='za-duzo'?'start':h;
+  var tab=(h==='za-duzo'||h==='medytacje')?'start':h;
   document.querySelectorAll('#tabs a').forEach(function(a){a.dataset.v===tab?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
   if(!$('sheet').hidden)closeSheet();
   window.scrollTo(0,0);
@@ -615,7 +678,8 @@ function markToday(){if(!ch)return false;var t=today();if(dayDiff(ch.start,t)>=1
 
 /* global clicks */
 document.addEventListener('click',function(e){
-  var b=e.target.closest('[data-open]');if(b){var p=b.dataset.open.split(':');if(p[0]==='b')openBreath(find(TECH,p[1]),p[2]?+p[2]:0,!!p[2]);else openTool(find(TOOLS,p[1]));return}
+  var b=e.target.closest('[data-open]');if(b){var p=b.dataset.open.split(':');if(p[0]==='b')openBreath(find(TECH,p[1]),p[2]?+p[2]:0,!!p[2]);else if(p[0]==='m')openMed(find(MEDS,p[1]));else openTool(find(TOOLS,p[1]));return}
+  var sc=e.target.closest('[data-scene]');if(sc&&pickScene){pickScene(sc.dataset.scene);return}
   var k=e.target.closest('[data-cal="ics"]');if(k){downloadIcs();var m=k.closest('.remind').querySelector('[data-calmsg]');if(m)m.textContent='Pobrano plik. Otwórz go, żeby dodać przypomnienia do kalendarza.';return}
   var c=e.target.closest('[data-ch]');if(c){var a=c.dataset.ch;if(a==='start'||a==='reset'){ch={start:today(),done:[]};save('challenge',ch);confirmReset=false}else confirmReset=(a==='ask');renderChallenge();return}
   var s=e.target.closest('[data-sig]');if(s){var id=s.dataset.sig,i=sigOn.indexOf(id);if(i>=0)sigOn.splice(i,1);else sigOn.push(id);save('signals',sigOn);renderSignals()}
@@ -633,16 +697,11 @@ function noise(kind){var len=ac.sampleRate*4,buf=ac.createBuffer(1,len,ac.sample
 function lfo(f,depth,target){var o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=depth;o.connect(g);g.connect(target);o.start();return o}
 function filt(type,f,q){var b=ac.createBiquadFilter();b.type=type;b.frequency.value=f;if(q)b.Q.value=q;return b}
 function startBg(kind){
-  stopBg();if(kind==='brak'||!AC())return;
-  var src=ac.createBufferSource(),g=ac.createGain(),out=ac.createGain(),l=[],chain;src.loop=true;out.gain.value=0;
-  if(kind==='deszcz'){src.buffer=noise('white');chain=[filt('highpass',900),filt('lowpass',5500)];g.gain.value=.11}
-  else if(kind==='wiatr'){src.buffer=noise('brown');var bp=filt('bandpass',450,.8);chain=[bp];l.push(lfo(.07,250,bp.frequency));g.gain.value=.6;l.push(lfo(.11,.25,g.gain))}
-  else if(kind==='liscie'){src.buffer=noise('white');var bp2=filt('bandpass',3200,.6);chain=[filt('highpass',1200),bp2];g.gain.value=.05;l.push(lfo(.13,.035,g.gain));l.push(lfo(.31,.02,g.gain));l.push(lfo(.05,900,bp2.frequency))}
-  else{src.buffer=noise('brown');chain=[filt('highpass',250),filt('lowpass',2600)];g.gain.value=.45;l.push(lfo(.35,.08,g.gain))}
-  var n=src;chain.forEach(function(f){n.connect(f);n=f});n.connect(g);g.connect(out);out.connect(ac.destination);src.start();
-  out.gain.linearRampToValueAtTime(prefs.vol,ac.currentTime+2.5);bg={src:src,out:out,l:l};
+  stopBg();if(!kind||kind==='brak'||!AC()||!window.SensusScenes)return;
+  var out=ac.createGain();out.gain.value=0;var snd=SensusScenes.sound(ac,kind);snd.node.connect(out);out.connect(ac.destination);
+  out.gain.linearRampToValueAtTime(prefs.vol,ac.currentTime+2.5);bg={s:snd,out:out,kind:kind};
 }
-function stopBg(){if(!bg||!ac)return;var b=bg;bg=null;var t=ac.currentTime;b.out.gain.cancelScheduledValues(t);b.out.gain.setValueAtTime(b.out.gain.value,t);b.out.gain.linearRampToValueAtTime(0,t+1);setTimeout(function(){try{b.src.stop();b.l.forEach(function(o){o.stop()})}catch(e){}},1200)}
+function stopBg(){if(!bg||!ac)return;var b=bg;bg=null;var t=ac.currentTime;b.out.gain.cancelScheduledValues(t);b.out.gain.setValueAtTime(b.out.gain.value,t);b.out.gain.linearRampToValueAtTime(0,t+1);setTimeout(function(){try{b.s.stop();b.out.disconnect()}catch(e){}},1200)}
 function tone(f,amp,len,pan){if(!AC())return;var o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime,n=g;o.type='sine';o.frequency.value=f;
   g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(amp,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+len);o.connect(g);
   if(pan&&ac.createStereoPanner){var p=ac.createStereoPanner();p.pan.value=pan;g.connect(p);n=p}n.connect(ac.destination);o.start(t);o.stop(t+len+.05)}
@@ -654,12 +713,19 @@ function wakeOn(){try{navigator.wakeLock&&navigator.wakeLock.request('screen').t
 function wakeOff(){if(wake){try{wake.release()}catch(e){}wake=null}}
 
 /* sheet */
-var cleanup=null;
+var cleanup=null,pickScene=null,cvOn=false;
+function immersive(sc){if(!sc||sc==='brak'||!window.SensusScenes){exitImm();return}var sh=$('sheet');sh.classList.add('immersive');sh.classList.remove('dim');$('sceneCv').hidden=false;$('sceneShade').hidden=false;
+  if(cvOn)SensusScenes.set(sc);else{SensusScenes.start($('sceneCv'),sc,{reduce:RM()});cvOn=true}}
+function exitImm(){if(cvOn){SensusScenes.stop();cvOn=false}var sh=$('sheet');sh.classList.remove('immersive');sh.classList.remove('dim');$('sceneCv').hidden=true;$('sceneShade').hidden=true}
+function pillHtml(cur){if(!window.SensusScenes)return '';
+  return '<div><div class="pill" role="radiogroup" aria-label="Scena i dźwięki natury">'+SensusScenes.list.map(function(x){return '<button type="button" role="radio" aria-checked="'+(x.id===cur)+'" data-scene="'+x.id+'" aria-label="'+x.name+'" title="'+x.name+'">'+SensusScenes.icon(x.id)+'</button>'}).join('')+'</div>'+
+   '<div class="pill-name"><span id="pillName">'+sceneName(cur)+'</span><svg viewBox="0 0 130 10" aria-hidden="true"><path d="M2 6c20 0 24-4 44-4s24 6 44 6 22-4 38-4"/></svg></div></div>'}
+function updatePill(v){document.querySelectorAll('#shBody [data-scene]').forEach(function(b){b.setAttribute('aria-checked',b.dataset.scene===v)});var n=$('pillName');if(n)n.textContent=sceneName(v)}
 var lastFocus=null;
 function focusIn(){var h=$('shBody').querySelector('h2');$('sheet').setAttribute('aria-label',h?h.textContent:$('shEy').textContent);var f=$('shBody').querySelector('[data-focus]');(f||$('shClose')).focus({preventScroll:true})}
-function openSheet(ey,html){if(cleanup){cleanup();cleanup=null}if($('sheet').hidden)lastFocus=document.activeElement;$('shEy').textContent=ey;$('shBody').innerHTML=html;$('sheet').hidden=false;document.body.style.overflow='hidden';$('sheet').scrollTop=0;focusIn()}
+function openSheet(ey,html){if(cleanup){cleanup();cleanup=null}exitImm();pickScene=null;if($('sheet').hidden)lastFocus=document.activeElement;$('shEy').textContent=ey;$('shBody').innerHTML=html;$('sheet').hidden=false;document.body.style.overflow='hidden';$('sheet').scrollTop=0;focusIn()}
 function setBody(html){if(cleanup){cleanup();cleanup=null}$('shBody').innerHTML=html;$('sheet').scrollTop=0;focusIn()}
-function closeSheet(){if(cleanup){cleanup();cleanup=null}stopBg();wakeOff();$('sheet').hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.isConnected&&!lastFocus.closest('#sheet'))try{lastFocus.focus({preventScroll:true})}catch(e){}}
+function closeSheet(){if(cleanup){cleanup();cleanup=null}stopBg();exitImm();pickScene=null;wakeOff();$('sheet').hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.isConnected&&!lastFocus.closest('#sheet'))try{lastFocus.focus({preventScroll:true})}catch(e){}}
 $('shClose').addEventListener('click',closeSheet);
 $('setBtn').addEventListener('click',openSettings);
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('sheet').hidden)closeSheet()});
@@ -667,7 +733,7 @@ function seg(el,items,val,on){el.innerHTML=items.map(function(i){return '<button
   el.onclick=function(e){var b=e.target.closest('button');if(!b)return;el.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});on(b.dataset.val)}}
 function plural(n,a,b,c){if(n===1)return a;var m=n%10,h=n%100;return(m>=2&&m<=4&&(h<12||h>14))?b:c}
 function fmt(s){s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
-var SOUNDS=[['brak','Cisza'],['liscie','Szum liści'],['deszcz','Deszcz'],['wiatr','Wiatr'],['strumien','Strumień']];
+function sceneOpts(){return [['brak','Bez tła']].concat(window.SensusScenes?SensusScenes.list.map(function(x){return [x.id,SensusScenes.icon(x.id)+x.name]}):[])}
 
 /* breathing */
 function openBreath(t,reps,auto){
@@ -680,7 +746,7 @@ function openBreath(t,reps,auto){
    '<div class="blk"><span class="lbl">Instrukcja</span><ol class="steps">'+t.steps.map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></div>'+
    (t.note?'<p class="note">'+esc(t.note)+'</p>':'')+
    '<div class="blk"><span class="lbl">Ile razy</span><div class="seg" id="bReps"></div><span class="stat num" id="bLen"></span></div>'+
-   '<div class="blk"><span class="lbl">Tło dźwiękowe</span><div class="seg" id="bSound"></div>'+
+   '<div class="blk"><span class="lbl">Scena i dźwięki natury</span><div class="seg" id="bSound"></div>'+
    '<label for="vol" class="lbl" style="font-weight:500">Głośność tła</label><input type="range" id="vol" min="0" max="1" step="0.05" value="'+prefs.vol+'">'+
    '<label class="check"><input type="checkbox" id="chime"'+(prefs.chime?' checked':'')+'> Delikatny dźwięk przy zmianie fazy</label>'+
    '<label class="check"><input type="checkbox" id="counter"'+(prefs.counter?' checked':'')+'> Pokazuj odliczanie sekund</label>'+vibHtml('vib')+'</div>'+
@@ -688,7 +754,7 @@ function openBreath(t,reps,auto){
   function len(){$('bLen').textContent='około '+fmt(reps*cyc)+' min'}
   var opts=t.reps.length>1?t.reps:[t.reps[0]];
   seg($('bReps'),opts.map(function(r){return [r,r+' '+plural(r,'raz','razy','razy')]}),reps,function(v){reps=+v;len()});len();
-  seg($('bSound'),SOUNDS,prefs.sound,function(v){prefs.sound=v;save('prefs',prefs);if(v==='brak')stopBg();else startBg(v)});
+  seg($('bSound'),sceneOpts(),sceneFor(t),function(v){prefs.scenes[t.id]=v;save('prefs',prefs);if(v==='brak')stopBg();else startBg(v)});
   $('vol').oninput=function(){prefs.vol=+this.value;save('prefs',prefs);if(bg)bg.out.gain.setTargetAtTime(prefs.vol,ac.currentTime,.2)};
   $('chime').onchange=function(){prefs.chime=this.checked;save('prefs',prefs)};
   $('counter').onchange=function(){prefs.counter=this.checked;save('prefs',prefs)};
@@ -697,15 +763,16 @@ function openBreath(t,reps,auto){
   if(auto)runBreath(t,reps);
 }
 function runBreath(t,reps){
-  AC();
-  setBody('<div class="stage"><div class="orbwrap" aria-hidden="true"><svg class="rings" viewBox="0 0 200 200" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="100" cy="100" r="99" stroke-width=".8"/><circle cx="100" cy="100" r="90" stroke-width=".5"/><circle cx="100" cy="100" r="78" stroke-width=".5" stroke-dasharray="2 3"/><circle cx="100" cy="100" r="62" stroke-width=".5"/></svg><div class="orb" id="orb"><span class="count num" id="count"></span></div></div>'+
+  AC();var sc=sceneFor(t);immersive(sc);
+  setBody((sc!=='brak'?pillHtml(sc):'')+'<div class="stage"><div class="orbwrap" aria-hidden="true"><svg class="rings" viewBox="0 0 200 200" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="100" cy="100" r="99" stroke-width=".8"/><circle cx="100" cy="100" r="90" stroke-width=".5"/><circle cx="100" cy="100" r="78" stroke-width=".5" stroke-dasharray="2 3"/><circle cx="100" cy="100" r="62" stroke-width=".5"/></svg><div class="orb" id="orb"><span class="count num" id="count"></span></div></div>'+
    '<div style="display:flex;flex-direction:column;gap:10px;align-items:center"><p class="phase" id="phase" aria-hidden="true">Przygotuj się</p><p class="via" id="via" aria-hidden="true"></p></div>'+
    '<div class="bar" aria-hidden="true"><i id="bar"></i></div><p class="stat num" id="rep"></p>'+
    '<div class="row" style="justify-content:center"><button class="btn ghost" id="bPause" data-focus>Pauza</button><button class="btn ghost" id="bEnd">Zakończ</button></div></div>');
   var seq=[],T=0;for(var r=0;r<reps;r++)t.phases.forEach(function(p,k){seq.push({p:p,a:T,b:T+p.s,r:r,first:k===0});T+=p.s});
   var TG={in:1,top:1.1,out:.55};var prev=.55;seq.forEach(function(q){q.from=prev;q.to=TG[q.p.t]!==undefined?TG[q.p.t]:prev;prev=q.to});
   var PREP=3,t0=performance.now(),pausedAcc=0,pausedAt=0,paused=false,idx=-1,raf=0,orb=$('orb'),count=$('count');
-  if(prefs.sound!=='brak'&&!bg)startBg(prefs.sound);wakeOn();
+  if(sc!=='brak'&&(!bg||bg.kind!==sc))startBg(sc);wakeOn();
+  pickScene=function(v){sc=v;prefs.scenes[t.id]=v;save('prefs',prefs);updatePill(v);immersive(v);if(!paused)startBg(v);say(sceneName(v))};
   say(t.name+'. '+reps+' '+plural(reps,'oddech','oddechy','oddechów')+'. Przygotuj się, zaczynamy za 3 sekundy.');
   function el(){return (performance.now()-t0-pausedAcc)/1000-PREP}
   function frame(){
@@ -726,7 +793,7 @@ function runBreath(t,reps){
   cleanup=function(){cancelAnimationFrame(raf)};
   $('bPause').onclick=function(){
     if(!paused){paused=true;pausedAt=performance.now();cancelAnimationFrame(raf);this.textContent='Wznów';$('phase').textContent='Pauza';stopBg();say('Pauza')}
-    else{paused=false;pausedAcc+=performance.now()-pausedAt;this.textContent='Pauza';if(idx>=0)$('phase').textContent=LABEL[seq[idx].p.t];if(prefs.sound!=='brak')startBg(prefs.sound);raf=requestAnimationFrame(frame);say('Wznowiono')}
+    else{paused=false;pausedAcc+=performance.now()-pausedAt;this.textContent='Pauza';if(idx>=0)$('phase').textContent=LABEL[seq[idx].p.t];if(sc!=='brak')startBg(sc);raf=requestAnimationFrame(frame);say('Wznowiono')}
   };
   $('bEnd').onclick=function(){var s=paused?(pausedAt-t0-pausedAcc)/1000-PREP:el();done(false,s)};
   function done(complete,secs){
@@ -745,6 +812,49 @@ function runBreath(t,reps){
 }
 
 /* tools */
+function openMed(m){
+  var sc=(prefs.medScenes&&prefs.medScenes[m.id])||m.scene,has=m.lines.length>0;
+  openSheet('Medytacje','<div class="med-top"><h2 class="sh-title" tabindex="-1" data-focus>'+esc(m.name)+'</h2><p class="script sh-sub">'+esc(m.sub)+'</p></div>'+
+   '<p class="pill-lbl">efekty do wyboru:</p>'+pillHtml(sc)+
+   '<div class="blk">'+(has?'<label class="check"><input type="checkbox" id="mCap"'+(prefs.captions?' checked':'')+'> Napisy</label><p class="stat">Głos SENSUS: nagranie pojawi się wkrótce. Na razie medytację prowadzą napisy.</p>':'')+
+   '<span class="lbl">Wyłącz dźwięk po</span><div class="seg" id="mSleep"></div>'+
+   '<label for="mVol" class="lbl" style="font-weight:500">Głośność natury</label><input type="range" id="mVol" min="0" max="1" step="0.05" value="'+prefs.vol+'"></div>'+
+   '<button class="btn wide" id="mGo">Zacznij</button>'+(has?'<p class="stat" style="text-align:center">Tekst medytacji jest przykładowy.</p>':''));
+  immersive(sc);
+  pickScene=function(v){sc=v;prefs.medScenes[m.id]=v;save('prefs',prefs);updatePill(v);immersive(v);startBg(v);say(sceneName(v))};
+  seg($('mSleep'),[[10,'10 min'],[20,'20 min'],[30,'30 min'],[60,'60 min']],prefs.sleepMin,function(v){prefs.sleepMin=+v;save('prefs',prefs)});
+  if($('mCap'))$('mCap').onchange=function(){prefs.captions=this.checked;save('prefs',prefs)};
+  $('mVol').oninput=function(){prefs.vol=+this.value;save('prefs',prefs);if(bg)bg.out.gain.setTargetAtTime(prefs.vol,ac.currentTime,.2)};
+  $('mGo').onclick=function(){runMed(m,sc)};
+}
+function runMed(m,sc){
+  AC();var lines=m.lines,has=lines.length>0,starts=[],T=4,total=prefs.sleepMin*60;lines.forEach(function(l){starts.push(T);T+=l[0]});
+  setBody('<div class="med-run"><p class="pill-lbl">efekty do wyboru:</p>'+pillHtml(sc)+
+   '<div class="cap fade'+(has&&prefs.captions?'':' off')+'" id="cap" aria-hidden="true"></div>'+
+   '<div class="med-ctrl"><p class="stat num" id="mLeft"></p><div class="row" style="justify-content:center"><button class="btn ghost" id="mPause" data-focus>Pauza</button>'+
+   (has?'<button class="btn ghost" id="mCapT">'+(prefs.captions?'Ukryj napisy':'Pokaż napisy')+'</button>':'')+'<button class="btn ghost" id="mEnd">Zakończ</button></div></div></div>');
+  immersive(sc);if(!bg||bg.kind!==sc)startBg(sc);
+  say(m.name+'. Dźwięk wyłączy się sam za '+prefs.sleepMin+' minut.');
+  var t0=performance.now(),acc=0,pAt=0,paused=false,ci=-2,iv=0,cap=$('cap'),capT=0;
+  pickScene=function(v){sc=v;prefs.medScenes[m.id]=v;save('prefs',prefs);updatePill(v);immersive(v);if(!paused)startBg(v);say(sceneName(v))};
+  function show(txt){clearTimeout(capT);cap.classList.add('fade');capT=setTimeout(function(){cap.textContent=txt;if(txt)cap.classList.remove('fade')},900);if(txt)say(txt)}
+  function tick(){
+    var s=(performance.now()-t0-acc)/1000,i=-1;
+    for(var k=0;k<lines.length;k++)if(s>=starts[k]&&s<starts[k]+lines[k][0])i=k;
+    if(i!==ci){ci=i;show(i>=0?lines[i][1]:'')}
+    var left=total-s;$('mLeft').textContent='Dźwięk ucichnie za '+fmt(left);
+    if(left<60&&bg)bg.out.gain.setTargetAtTime(prefs.vol*Math.max(0,left/60),ac.currentTime,.4);
+    if(left<=0)fin();
+  }
+  iv=setInterval(tick,250);tick();cleanup=function(){clearInterval(iv);clearTimeout(capT)};
+  $('mPause').onclick=function(){if(!paused){paused=true;pAt=performance.now();clearInterval(iv);stopBg();this.textContent='Wznów';say('Pauza')}else{paused=false;acc+=performance.now()-pAt;startBg(sc);iv=setInterval(tick,250);this.textContent='Pauza';say('Wznowiono')}};
+  if($('mCapT'))$('mCapT').onclick=function(){prefs.captions=!prefs.captions;save('prefs',prefs);cap.classList.toggle('off',!prefs.captions);this.textContent=prefs.captions?'Ukryj napisy':'Pokaż napisy'};
+  $('mEnd').onclick=fin;
+  function fin(){clearInterval(iv);clearTimeout(capT);cleanup=null;stopBg();pickScene=null;$('sheet').classList.add('dim');
+    setBody('<div class="stage"><h2 style="font-size:46px" tabindex="-1" data-focus>Śpij dobrze.</h2><p class="lead">Dobrze, że ta chwila była dla Ciebie.</p>'+
+     '<div class="row" style="justify-content:center"><button class="btn" id="mAgain">Jeszcze raz</button><a class="btn ghost" href="#medytacje">Medytacje</a></div></div>');
+    $('mAgain').onclick=function(){runMed(m,sc)}}
+}
 function openTool(t){
   if(t.type==='stepper')return stepper(t);
   if(t.type==='timer')return timerIntro(t);
